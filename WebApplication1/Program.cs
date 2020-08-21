@@ -21,6 +21,7 @@ namespace WebApplication1
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
                 try
                 {
                     var context = services.GetRequiredService<Data.AppDbContext>();
@@ -30,14 +31,13 @@ namespace WebApplication1
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred creating the DB.");
-
                 }
             }
+
             host.Run();
-            //CreateHostBuilder(args).Build().Run();
         }
 
-       
+
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
